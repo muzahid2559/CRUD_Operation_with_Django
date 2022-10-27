@@ -8,7 +8,7 @@
 <ol>
   {% if musician_list %}
   {% for musician in musician_list %}
-  <li><a href="">{{ musician.first_name }} {{ musician.last_name }}</a></li>
+  <li><a href="{% url 'CRUD:album_list' musician_id=musician.id %}">{{ musician.first_name }} {{ musician.last_name }}</a></li>
 
   {% endfor %}
   {% else %}
