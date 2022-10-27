@@ -7,7 +7,7 @@ from django.db.models import Avg
 # Create your views here.
 def index(request):
     musician_list = Musician.objects.order_by("first_name")
-    
+
     diction = {'title':'Home Page', 'musician_list':musician_list}
     return render(request,'CRUD/index.html',context=diction)
 
@@ -43,3 +43,18 @@ def album_form(request):
 
     diction = {'title':'Add New Album', 'album_form':form}
     return render(request,'CRUD/album_form.html',context=diction)
+
+def update_musician(request, musician_id):
+    musician_info = Musician.objects.get(pk=musician_id)
+    form = forms.MusicianForm(instance=musician_info)
+
+    if request.method == 'POST':
+        form = forms.MusicianForm(request.POST, instance=musician_info)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return album_list(request, musician_id)
+
+
+    diction = {'update_form':form}
+    return render(request, 'CRUD/update_musician.html', context=diction)

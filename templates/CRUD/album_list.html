@@ -6,6 +6,8 @@
 <h4 style="text-align:center;">Instrument: <span style="font-weight:bold;">{{ musician_info.instrument }}</span></h4>
 <h4 style="text-align:center;">Artist Rating: <span style="font-weight:bold;">{{ musician_rating_avg.num_stars__avg  }}</span></h4>
 
+<div style="text-align:center;"><a href="{% url 'CRUD:update_musician' musician_id=musician_info.id %}" class="btn btn-success btn-sm">Update</a>
+
 <h3>List of Albums:</h3>
 <table class="table table-bordered">
   <tr>
