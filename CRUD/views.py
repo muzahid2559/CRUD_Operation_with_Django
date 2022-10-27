@@ -2,16 +2,21 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from CRUD.models import Musician, Album
 from CRUD import forms
+from django.db.models import Avg
 
 # Create your views here.
 def index(request):
     musician_list = Musician.objects.order_by("first_name")
+    
     diction = {'title':'Home Page', 'musician_list':musician_list}
     return render(request,'CRUD/index.html',context=diction)
 
 def album_list(request, musician_id):
     musician_info = Musician.objects.get(pk=musician_id)
-    diction = {'title':'List of Albums', 'musician_info':musician_info}
+    album_list = Album.objects.filter(artist=musician_id).order_by('name','release_date')
+    musician_rating_avg = Album.objects.filter(artist=musician_id).aggregate(Avg('num_stars'))
+
+    diction = {'title':'List of Albums', 'musician_info':musician_info, 'album_list':album_list, 'musician_rating_avg':musician_rating_avg}
     return render(request,'CRUD/album_list.html',context=diction)
 
 def musician_form(request):

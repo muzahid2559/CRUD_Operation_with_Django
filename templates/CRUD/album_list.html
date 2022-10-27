@@ -4,6 +4,21 @@
 {% block body_block %}
 <h4 style="text-align:center;">Artist Name: <span style="font-weight:bold;">{{ musician_info.first_name }} {{ musician_info.last_name }}</span></h4>
 <h4 style="text-align:center;">Instrument: <span style="font-weight:bold;">{{ musician_info.instrument }}</span></h4>
+<h4 style="text-align:center;">Artist Rating: <span style="font-weight:bold;">{{ musician_rating_avg.num_stars__avg  }}</span></h4>
 
 <h3>List of Albums:</h3>
+<table class="table table-bordered">
+  <tr>
+    <th>Album Name</th>
+    <th>Release Date</th>
+    <th>Rating</th>
+  </tr>
+  {% for album in album_list %}
+  <tr>
+     <td>{{ album.name }}</td>
+    <td>{{ album.release_date|date:"M d, Y" }}</td>
+    <td>{{ album.num_stars }}</td>
+  </tr>
+  {% endfor %}
+</table>
 {% endblock %}
