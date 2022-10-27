@@ -58,3 +58,19 @@ def update_musician(request, musician_id):
 
     diction = {'update_form':form}
     return render(request, 'CRUD/update_musician.html', context=diction)
+
+
+def update_album(request, album_id):
+    album_info = Album.objects.get(pk=album_id)
+    form = forms.AlbumForm(instance=album_info)
+    diction = {}
+    if request.method == 'POST':
+        form = forms.AlbumForm(request.POST, instance=album_info)
+
+        if form.is_valid():
+            form.save(commit=True)
+            diction.update({'success_text':'Successfully Updated!'})
+
+    diction.update({'update_form':form})
+    diction.update({'album_id':album_id})
+    return render(request,'CRUD/update_album.html', context=diction)

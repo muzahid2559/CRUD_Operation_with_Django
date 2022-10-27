@@ -20,6 +20,8 @@
      <td>{{ album.name }}</td>
     <td>{{ album.release_date|date:"M d, Y" }}</td>
     <td>{{ album.num_stars }}</td>
+
+    <td> <a href="{% url 'CRUD:update_album' album_id=album.id %}"><input type="submit" name="submit" value="Update" class="btn btn-success btn-sm"></a> </td>
   </tr>
   {% endfor %}
 </table>
