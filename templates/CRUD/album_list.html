@@ -14,6 +14,7 @@
     <th>Album Name</th>
     <th>Release Date</th>
     <th>Rating</th>
+    <th>Action</th>
   </tr>
   {% for album in album_list %}
   <tr>
@@ -21,7 +22,8 @@
     <td>{{ album.release_date|date:"M d, Y" }}</td>
     <td>{{ album.num_stars }}</td>
 
-    <td> <a href="{% url 'CRUD:update_album' album_id=album.id %}"><input type="submit" name="submit" value="Update" class="btn btn-success btn-sm"></a> </td>
+    <td> <a href="{% url 'CRUD:update_album' album_id=album.id %}"><input type="submit" name="submit" value="Update" class="btn btn-success btn-sm"></a>
+         <a href="{% url 'CRUD:delete_album' album_id=album.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Delete This Album?')">Delete</a> </td>
   </tr>
   {% endfor %}
 </table>

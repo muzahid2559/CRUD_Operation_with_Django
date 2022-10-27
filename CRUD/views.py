@@ -74,3 +74,8 @@ def update_album(request, album_id):
     diction.update({'update_form':form})
     diction.update({'album_id':album_id})
     return render(request,'CRUD/update_album.html', context=diction)
+
+def delete_album(request, album_id):
+    album = Album.objects.get(pk=album_id).delete()
+    diction = {'delete_success':'Album Deleted Successfully!'}
+    return render(request, 'CRUD/delete.html', context=diction)
